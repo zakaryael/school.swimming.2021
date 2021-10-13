@@ -1,1 +1,2 @@
 * xref:index.adoc[Swimming]
+* xref:project.adoc[Project]

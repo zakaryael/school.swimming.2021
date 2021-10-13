@@ -1,0 +1,27 @@
+= Project:: Smart Three-sphere swimmer near a wall
+
+
+**Keywords**: Reinforcement learning, Three-sphere swimmer Supervisors: Luca Berti, Laetitia Giraldi, Christophe Prud'homme
+
+== Objectives
+
+In the recent literature, reinforcement learning has been applied to the study of motion of swimmers <<Cheng2020>>,<<Colabrese2017>>,<<Alageshan2020>>,<<Watkins1992>>.
+Recent studies which link optimal swimming and machine learning tools have been developed for “toy” cases far from the wall and obstacles. 
+Indeed, the state and action spaces accessible by a swimmer are limited in such situation. By considering boundary interactions, the number of states of a swimmer increases <<Alouges2013>>, as well as the strategies for swimming, making the computation of the optimum a challenging task.
+An existing code allows the Q-learning algorithm to interact with {feelpp}'s fluid toolbox in order to compute the optimal strategy for Three sphere swimmer moving in a straight line (recovering the result of <<Cheng2020>>).
+
+From this previous works, the tasks for this project will be:
+
+* understanding the Q-learning method and the available code in Python
+* modelling the three-sphere/wall system in terms of states, actions, reward
+* consider other reinforcement learning methods and evaluate their suitability for learning to swim near and far from a wall. In particular, we are interested in methods where reinforcement learning would interact with function approximation to handle the case where the cardinality of the state space is very large (as for a swimmer close to a boundary). An example of such methods could be deep Q-networks.
+
+== Tools
+
+* Vscode (programming environment to work with the cluster – optional but highly suggested),
+* Feel++ and its CDF toolbox
+* Python and related libraries for Machine and Reinforcement Learning (ex Pytorch)
+
+
+
+include::partial$refs.adoc[]

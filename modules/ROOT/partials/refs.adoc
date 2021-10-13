@@ -1,0 +1,12 @@
+[bibliography]
+== References 
+
+- [[[Cheng2020]]] A. Cheng Hou Tsang, P. Wai Tong, S. Nallan, & O. Shun Pak, _Self-learning how to swim at low Reynolds number_, Phys. Rev. Fluids, $5074104,2020 .$
+
+- [[[Colabrese2017]]] Colabrese, S., Gustavsson, K., Celani, A., & Biferale, L. (2017). _Flow navigation by smart microswimmers via reinforcement learning._ Physical review letters, 118(15), 158004 .
+
+- [[[Alageshan2020]]] Alageshan, J. K., Verma, A. K., Bec, J., & Pandit, R. (2020). _Machine learning strategies for path-planning microswimmers in turbulent flows._ Physical Review E, 101(4), 043110.
+
+- [[[Watkins1992]]] Watkins, C. J., & Dayan, P. (1992). _$Q$-learning_. Machine learning, 8(3-4), 279-292.
+
+- [[[Alouges2013]]] Alouges, F., & Giraldi, L. (2013). _Enhanced controllability of low Reynolds number swimmers in the presence of a wall._ Acta Applicandae Mathematicae, 128(1), 153-179.
