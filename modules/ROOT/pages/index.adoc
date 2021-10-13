@@ -4,3 +4,14 @@ ifdef::env-github,env-browser,env-vscode[:imagesprefix:]
 
 = Swimming Project 
 
+== Course
+
+The course Mathematical and Computation Framework for Micro-Swimming is available link:{attachmentsdir}/inria-school-2021-course-math-comp-swimming-framework.pdf[Download PDF].
+
+The outline is as follows:
+
+* Swimming at Low Reynolds
+* Articulated swimmers: The n-sphere swimmer
+* Modeling
+* Discretisation
+*
