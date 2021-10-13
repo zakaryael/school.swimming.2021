@@ -16,7 +16,7 @@
 	}
 }
 
-\graphicspath{{figures/}}
+%\graphicspath{{figures/}}
 \setbeamertemplate{title page}
 {
 	\begin{centering}
@@ -71,7 +71,7 @@
 \date{18th May 2021}
 \newcommand{\feelpp}{|Feel++|}
 \begin{document}
-		{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{FrontPagePresentation_bottom.pdf}}
+		{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{figures/FrontPagePresentation_bottom.pdf}}
 			\begin{frame}[plain]
 				\maketitle
 			\end{frame}
@@ -263,15 +263,15 @@
 	\begin{frame}{Remeshing in Feel++ using (Par)MMG}
 		\begin{columns}
 			\begin{column}{0.49\textwidth}
-				\includegraphics[width=\linewidth]{2d_remeshing.png}
+				\includegraphics[width=\linewidth]{figures/2d_remeshing.png}
 			\end{column}
 			\begin{column}{0.49\textwidth}
-					\includegraphics[width=\linewidth]{DRIVEN_CAVITY.png}
+					\includegraphics[width=\linewidth]{figures/DRIVEN_CAVITY.png}
 			\end{column}
 		\end{columns}
 		\begin{columns}
 			\begin{column}{0.5\textwidth}
-					\includegraphics[width=\linewidth]{3D_SLIDING.png}
+					\includegraphics[width=\linewidth]{figures/3D_SLIDING.png}
 			\end{column}
 			\begin{column}{0.49\textwidth}
 				\begin{itemize}
@@ -293,8 +293,8 @@
 	\frametitle{Parallel remeshing}
 	\begin{columns}
 		\begin{column}{.5\linewidth}
-			\includegraphics[width=.7\linewidth]{par-mesh-n6-1.png}\\
-			\includegraphics[width=.7\linewidth]{par-remesh-n6-1.png}
+			\includegraphics[width=.7\linewidth]{figures/par-mesh-n6-1.png}\\
+			\includegraphics[width=.7\linewidth]{figures/par-remesh-n6-1.png}
 		\end{column}
 		\begin{column}{.5\linewidth}
 			\begin{itemize}
@@ -359,24 +359,24 @@
 	We individuated three remeshing procedures that corresponded to different needs of our model swimmers:
 	\begin{itemize}
 		\only<1>{\item Initial mesh size distribution $\neq$ Desired mesh size distribution
-		\includegraphics[width=0.45\linewidth]{gait-2.png}
-		\includegraphics[width=0.45\linewidth]{nature-remesh-1.png}
+		\includegraphics[width=0.45\linewidth]{figures/gait-2.png}
+		\includegraphics[width=0.45\linewidth]{figures/nature-remesh-1.png}
 		\begin{itemize}
 			\item Define the mesh size distribution in the fluid
 			\item Remesh by keeping fixed the elements in the swimmer
 	\end{itemize}}
 		
 		\only<2>{\item Reference swimmer configuration $\neq$ Swimmer configuration at $t=0$
-			\includegraphics[width=0.45\linewidth]{gait-2.png}
-		\includegraphics[width=0.45\linewidth]{gait-3.png}
+			\includegraphics[width=0.45\linewidth]{figures/gait-2.png}
+		\includegraphics[width=0.45\linewidth]{figures/gait-3.png}
 	\begin{itemize}
 		\item Define the displacement in the reference configuration and fraction it in sub-steps
 		\item Alternate harmonic extensions and remeshing steps until the $t=0$ position is reached
 \end{itemize}}
 		
 		\only<3>{\item Reaching the desired configuration by sub-steps (3d and 2d)
-			\includegraphics[width=0.45\linewidth]{gait-6.png}
-			\includegraphics[width=0.45\linewidth]{gait-7.png}
+			\includegraphics[width=0.45\linewidth]{figures/gait-6.png}
+			\includegraphics[width=0.45\linewidth]{figures/gait-7.png}
 			\begin{itemize}
 				\item Given the displacement $\eta_{n+1}$, fraction it in sub-steps
 				\item Alternate harmonic extensions and remeshing steps until the  position at $t=t_{n+1}$ is reached
@@ -521,13 +521,13 @@
 				\draw[dashed,red, thick] (0,0.55) -- (0,-6.5);
 			\end{tikzpicture}
 		}
-		\includegraphics[width=0.3\textwidth]{W_cl.png}
-		\includegraphics[width=0.3\textwidth]{CM_evolution_1.png}
+		\includegraphics[width=0.3\textwidth]{figures/W_cl.png}
+		\includegraphics[width=0.3\textwidth]{figures/CM_evolution_1.png}
 		\caption{Three-sphere swimmer and its swimming gait.}
 		
 		\label{Fig:results}
 		\begin{center}
-			\includegraphics[width=0.5\linewidth]{Threespheres.png}
+			\includegraphics[width=0.5\linewidth]{figures/Threespheres.png}
 		\end{center}
 	\end{figure}
 \footnote{\tiny Luca Berti, Vincent Chabannes, Laetitia Giraldi, Christophe Prud'Homme. Modeling and finite element simulation of multi-sphere swimmers. 2020.}
@@ -657,8 +657,8 @@
 \begin{figure}
 	\caption[caption]{ Left: Implicit Euler scheme (blue) and position (red).
 		Right: Runge-Kutta 4 scheme (green) vs Implicit Euler scheme (blue).}
-	\includegraphics[width=0.45\linewidth]{gait-5.png}
-	\includegraphics[width=0.45\linewidth]{gait-4.png}
+	\includegraphics[width=0.45\linewidth]{figures/gait-5.png}
+	\includegraphics[width=0.45\linewidth]{figures/gait-4.png}
 \end{figure}
 \end{frame}
 \begin{frame}
