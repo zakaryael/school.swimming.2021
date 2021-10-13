@@ -23,7 +23,6 @@ jobs:
       - name: Compile LaTeX document
         run: |
           pdflatex --shell-escape course.tex
-          bibtex course
           pdflatex --shell-escape course.tex
           pdflatex --shell-escape course.tex
         working-directory: course
