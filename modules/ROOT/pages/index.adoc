@@ -2,16 +2,43 @@
 :imagesprefix:
 ifdef::env-github,env-browser,env-vscode[:imagesprefix:]
 
-= Swimming Project 
+= Swimming Course and Project
 
-== Course
 
-The course Mathematical and Computation Framework for Micro-Swimming is available link:{attachmentsdir}/inria-school-2021-course-math-comp-swimming-framework.pdf[Download PDF].
+== Team
+
+* Laetitia Giraldi <giraldi@inria.fr>
+* Luca Berti <berti@math.unistra.fr>
+* Vincent Chabannes <vincent.chabannes@cemosis.fr>
+* Christophe Prudhomme <christophe.prudhomme@cemosis.fr>
+
+== Course: Mathematical and Computational Framework for Micro-Swimming
 
 The outline is as follows:
 
-* Swimming at Low Reynolds
-* Articulated swimmers: The n-sphere swimmer
-* Modeling
-* Discretisation
-*
+1. Swimming at Low Reynolds
+** Examples of micro-swimmers
+*** Articulated swimmers: n-sphere swimmer
+*** Spermatozoon
+2. Computational Tools
+** {feelpp}
+** {feelpp} CFD toolbox
+** Examples
+3. Mathematical Tools 
+** ALE transform
+*** Examples
+** Mesh adaptation
+*** Mesh metric
+*** Mesh quality criterion
+*** Examples
+** Moving rigid bodies
+*** Examples
+4. Fluid flow with moving rigid bodies
+** Examples and benchmarks
+5. Fluid flow with moving elastic bodies
+** Introducing the elastic velocity
+** Examples and benchmarks
+*** 3-sphere swimmer
+*** spermatozoon
+
+The course Mathematical and Computation Framework for Micro-Swimming is available link:{attachmentsdir}/inria-school-2021-course-math-comp-swimming-framework.pdf[Download PDF].
