@@ -13,9 +13,35 @@ jobs:
     steps:
     - run: echo ok go
 
-  docs:
+  latex: 
     if: "!contains(github.event.head_commit.message, 'doc skip')"
     needs: activate
+    runs-on: self-ubuntu-20.04
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2   
+      - name: Compile LaTeX document
+        run: |
+          pdflatex --shell-escape course.tex
+          bibtex course
+          pdflatex --shell-escape course.tex
+          pdflatex --shell-escape course.tex
+        working-directory: course
+      - name: move pdf
+        run: |
+          mv course/course.pdf modules/ROOT/attachments/inria-school-2021-course-math-comp-swimming-framework.pdf
+      - name: commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          date=$(date +%Y-%m-%d)
+          git add modules/ROOT/attachments/inria-school-2021-course-math-comp-swimming-framework.pdf
+          git commit -m "Auto updating of inria school course "${date}""
+          git push
+
+  antora:
+    if: "!contains(github.event.head_commit.message, 'doc skip')"
+    needs: latex
     runs-on: self-ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.1
