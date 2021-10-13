@@ -1,7 +1,7 @@
 [bibliography]
 == References 
 
-- [[[Cheng2020]]] A. Cheng Hou Tsang, P. Wai Tong, S. Nallan, & O. Shun Pak, _Self-learning how to swim at low Reynolds number_, Phys. Rev. Fluids, $5074104,2020 . link:{attachmentsdir}/Tsang2020.pdf[Download PDF]
+- [[[Cheng2020]]] A. Cheng Hou Tsang, P. Wai Tong, S. Nallan, & O. Shun Pak, _Self-learning how to swim at low Reynolds number_, Phys. Rev. Fluids, 5074104,2020 . link:{attachmentsdir}/Tsang2020.pdf[Download PDF]
 
 - [[[Colabrese2017]]] Colabrese, S., Gustavsson, K., Celani, A., & Biferale, L. (2017). _Flow navigation by smart microswimmers via reinforcement learning._ Physical review letters, 118(15), 158004 .  link:{attachmentsdir}/Colabrese2017.pdf[Download PDF]
 
