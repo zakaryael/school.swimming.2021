@@ -1,0 +1,12 @@
+name: swimming
+title: Swimming
+version: main
+start_page: ROOT:index.adoc
+asciidoc: 
+  attributes: 
+    hide-uri-scheme: '' 
+    year: 2021
+    pp: ++
+nav:
+- modules/ROOT/nav.adoc
+
