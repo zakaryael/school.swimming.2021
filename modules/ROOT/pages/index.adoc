@@ -7,7 +7,7 @@ ifdef::env-github,env-browser,env-vscode[:imagesprefix:]
 
 == Team
 
-* Laetitia Giraldi <giraldi@inria.fr>
+* Laetitia Giraldi <laetitia.giraldi@inria.fr>
 * Luca Berti <berti@math.unistra.fr>
 * Vincent Chabannes <vincent.chabannes@cemosis.fr>
 * Christophe Prudhomme <christophe.prudhomme@cemosis.fr>
