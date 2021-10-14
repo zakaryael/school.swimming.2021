@@ -21,15 +21,16 @@ The outline is as follows:
 *** Articulated swimmers: n-sphere swimmer
 *** Spermatozoon
 2. Computational Tools
-** {feelpp}
-** {feelpp} CFD toolbox
+** {feelpp} && {feelpp} CFD toolbox
 ** Examples
 3. Mathematical Tools 
-** ALE transform
-*** Examples
 ** Mesh adaptation
 *** Mesh metric
 *** Mesh quality criterion
+*** Examples
+** ALE transform
+*** Examples
+** Fluid in moving domain
 *** Examples
 ** Moving rigid bodies
 *** Examples
