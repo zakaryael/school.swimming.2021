@@ -10,3 +10,7 @@
 - [[[Watkins1992]]] Watkins, C. J., & Dayan, P. (1992). _$Q$-learning_. Machine learning, 8(3-4), 279-292.  link:{attachmentsdir}/Watkins1992.pdf[Download PDF]
 
 - [[[Alouges2013]]] Alouges, F., & Giraldi, L. (2013). _Enhanced controllability of low Reynolds number swimmers in the presence of a wall._ Acta Applicandae Mathematicae, 128(1), 153-179.  link:{attachmentsdir}/Giraldi2013.pdf[Download PDF]
+
+- [[[DRL_Review]]] Kai Arulkumaran, Marc Peter Deisenroth, Miles Brundage, Anil Anthony Bharath (2017). _A Brief Survey of Deep Reinforcement Learning._ IEEE SIGNAL PROCESSING MAGAZINE, SPECIAL ISSUE ON DEEP LEARNING FOR IMAGE UNDERSTANDING.  link:{attachmentsdir}/DRL_survey.pdf[Download PDF]
+
+- [[[DRL_FLUID_Review]]] Paul Garnier , Jonathan Viquerat , Jean Rabault , Aurélien Larcher , Alexander Kuhnle , Elie Hachem (2021). _A review on deep reinforcement learning for fluid mechanics._ Computers and Fluids, 225.  link:{attachmentsdir}/Fluid_DRL.pdf[Download PDF]
