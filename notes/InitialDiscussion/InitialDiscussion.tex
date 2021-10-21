@@ -1,13 +1,18 @@
 \documentclass{article}
-\title{Discussion about the project on 19 October 2021}
+\title{Discussions about the project during ``UCA School on Complex systems 2021''}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx,tikz}
 \usetikzlibrary{patterns}
+\usepackage{url}
+\usepackage{algorithm,algorithmic}
 \usepackage{fullpage}
 \author{L. Berti, Z. El Kiyati, S. Reidel; L. Giraldi, C. Prud'homme}
+
+\newcommand{\qhat}{\hat{Q}}
 \begin{document}
 	\maketitle
-	\section{Three sphere swimmer far from walls}
+	\section{19 October}
+	\subsection{Three sphere swimmer far from walls}
 	Possible actions
 	\begin{itemize}
 		\item Shrink 1 arm
@@ -48,7 +53,7 @@
 	\end{tikzpicture}}
 \caption{Three sphere swimmer, far from walls.}
 \end{figure}
-\section{Three sphere swimmer next to a wall}
+\subsection{Three sphere swimmer next to a wall}
 Experimentally, swimmers have high affinity to the walls, they stick to it. Then, depending on the angle, they can be deflected.
 
 We discussed about different aspects to describe our problem:
@@ -106,6 +111,37 @@ In this first approach, we will look at an episodic treatment of our problem: we
 The communication with the fluid solver is always performed by reading the result file (to get the centres of mass) and by modifying the input files (to prescribe the new action) until the final total time is reached, and this for each episode.
 \item The second approach we will look at is the \emph{\textbf{non-linear function approximation}} of $Q$ using neural networks. During our investigation, we will try with Deep Q-Network (inspired by paper \cite{novati_synchronisation_2017}) and with Deep Q-network with Long-Short Term Memory layers (inspired by paper \cite{verma_efficient_2018}).
 \end{enumerate}
+\section{20 October}
+\subsection{Linear continuous model}
+The first step now is to construct the \textit{feature vector} $x(s,a)$, function fo the state and actions that should encode some sort of interaction informations at the input of the model. In order to do so, we chose a tiling code approach (see \cite[Section 9.5]{sutton_reinforcement_2018}) that uses a finite collection of tiling square patterns to locate regions in the continuous space where the update of the $Q$ function should be ``extended''. 
+
+A tiling code algorithm is proposed in Python by R. Sutton in its website\footnote{\url{http://incompleteideas.net/tiles/tiles3.html}}. It outputs a vector $v$ of $N_{tilings}$ components, whose value $v_i$ is the global index of the tile among the whole collection of tiles, and at the same tile belongs to tiling $i$. 
+
+Once the feature vector has been constructed via tiling code, we apply an episodic semi-gradient\footnote{``Semi-gradient'' because there is not a gradient term with respect to weights of $\qhat(S',A';w)$, and a not a complete gradient of the $(R+\qhat(S',A';w)-\qhat(S,A;w))^2$ loss function is computed.} SARSA method to approximate the $Q$ function with a linear model $\qhat$ \cite[Sec 10.1]{sutton_reinforcement_2018} as reported in \ref{Algo:semi-gradientSARSA}. In the algorithm, $\qhat(s,a;w) = <x(s,a),w>$ is the linear approximation of the $Q$ function, hence $\nabla_w \qhat = x(s,a)$.
+\begin{algorithm}
+	\begin{algorithmic}
+		\REQUIRE $\alpha>0,\epsilon>0, w\in \mathbb{R}^d$, $\qhat$ parametrization (linear for us)\\		
+		\FOR{$i$ in $N_{episodes}$}
+		\STATE{Choose $S,A$ initial state and action of the episode (use $\epsilon$-greedy)\\
+		\FOR{$j$ in $N_{step}$}
+		\STATE{Take action $A$ and observe $S',R$\\
+		\IF{$S'$ is terminal}
+		\STATE{$w \leftarrow  w + \alpha[R-\qhat(S,A;w)]\nabla_w \qhat(S,A;w)$\\
+		Go to next episode}
+		\ENDIF\\
+		Choose $A'$ as a function of $\qhat(S',\cdot;w)$ via $\epsilon$-greedy scheme\\
+		$w \leftarrow  w + \alpha[R+\gamma \qhat(S',A';w)-\qhat(S,A;w)]\nabla_w \qhat(S,A;w)$\\
+		$S \leftarrow S'$\\
+		$A\leftarrow A'$
+		}
+		\ENDFOR
+		}
+		\ENDFOR
+		\ENSURE $w$
+	\end{algorithmic}
+\caption{Episodic semi-gradient SARSA approximation of $\qhat$}
+\label{Algo:semi-gradientSARSA}
+\end{algorithm}
 \bibliography{bib_UCA_school_project}
 \bibliographystyle{siam}
 \end{document}
