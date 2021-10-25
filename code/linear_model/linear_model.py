@@ -56,8 +56,9 @@ def generate_simulation(state, action) :
         Length1 = state[2]
 
     # orientation with respect to the x direction
-    theta = np.pi + np.arctan2((l2[len(l2)-1]-lL2[len(lL2)-1]),(l1[len(l1)-1]-lL1[len(lL1)-1]))
-    theta =theta if theta>0 else theta+2*np.pi
+    theta = np.arctan2((l2[len(l2)-1]-lL2[len(lL2)-1]),(l1[len(l1)-1]-lL1[len(lL1)-1]))
+    #MODIF
+    #theta =theta if theta>0 else theta+2*np.pi
 
 
     new_state = [y_cm,theta,Length1,Length2]
@@ -116,13 +117,13 @@ def possible_actions(state):
 
 N_max = 10 #number of episodes
 T_swimming_period = 4
-N_tilings = 8
-alpha = 0.1/N_tilings
-N_swimming_cycles = 10
+N_tilings = 1
+alpha = 0.8#0.1/N_tilings #MODIF
+N_swimming_cycles = 4
 
 D_max = 10 #max distance from wall
 
-iht = IHT(4096)
+iht = IHT(16)
 iht_size = iht.size
 weights = np.zeros(iht_size*len(actions_space))
 
@@ -142,7 +143,7 @@ def my_tiles(state):
 
 
 # State (y_2,\theta,L1,L2)
-W =[]
+W =np.zeros((T_swimming_period*N_max,iht_size*len(actions_space)))
 columns = ['Episode','Timestep','State','Action','Reward']
 Data = pd.DataFrame(columns=columns)
 for episode in range(0, N_max):
@@ -157,7 +158,14 @@ for episode in range(0, N_max):
     x_cm_init = 0
     cumulative_xcm2=0
     for iteration in range(T_swimming_period+1):
+        W[iteration]=weights
+        if iteration > 1:
+            print('--------- Weights W norm ---',np.linalg.norm(np.array(W)[iteration-1]))
+        print('--------- Weights W norm ---',np.linalg.norm(np.array(W)[iteration]))
+        print('--------- Weights norm ---',np.linalg.norm(np.array(weights)))
         # If the state is terminal
+        new_data = pd.DataFrame([[episode,iteration,state,action,cumulative_xcm2]],columns=columns)
+        Data = pd.concat([Data, new_data], ignore_index = True)
         print(state)
         reward,x_cm2,new_state = generate_simulation(state,action)
         print('------Results simulation ------',reward,x_cm2,new_state)
@@ -166,32 +174,35 @@ for episode in range(0, N_max):
         if (iteration==T_swimming_period): # The swimmer must move to the right
             for tile in my_tiles(state):
                 weights[tile+iht_size*action_index] += alpha*(reward-q_function(state,action_index,weights))
-            new_data = pd.DataFrame([[episode,iteration,state,"terminal_state",cumulative_xcm2]],columns=columns)
+            new_data = pd.DataFrame([[episode,iteration,new_state,"terminal_state",cumulative_xcm2]],columns=columns)
             Data = pd.concat([Data, new_data], ignore_index = True)
             break
         # Choose policy epsilon-greedily
-        if random.uniform(0,1) < 0.1 : 
-            new_action = random.choice(possible_actions(state)) # Here we choose a random action from the possible actions!
+        if random.uniform(0,1) < 0.3 : #0.1 MODIF
+            new_action = random.choice(possible_actions(new_state)) # Here we choose a random action from the possible actions!
             print('------Results simulation with random action------',reward,x_cm2,new_state,new_action)
             new_action_index = get_key(new_action, actions_space)   # Get the index of the action to be used to update the Q-function approximation
         else :                              # Here, the action that maximizes the Q-function will be chosen
-            possible_action_indexes = get_index_of_possible_actions(state)   # Get indexes of possible actions so we can access their Q-table values to choose the maximum
-
+            possible_action_indexes = get_index_of_possible_actions(new_state)   # Get indexes of possible actions so we can access their Q-table values to choose the maximum
             print('-------possible actions------',possible_action_indexes)
-            max_q = q_function(new_state,0,weights)
+            max_q = -100 # q_function(new_state,0,weights)
             for i in get_index_of_possible_actions(new_state):
                 q_value = q_function(new_state,i,weights)
+                print('----',q_value,'----',actions_space[i])
                 if q_value >=max_q:
+                    max_q = q_value
                     new_action_index = i
             new_action = actions_space[new_action_index] 
             print('------Results simulation with new action------',reward,x_cm2,new_state,new_action)
+        print('----------Error------------ ',reward+q_function(new_state,new_action_index,weights)-q_function(state,action_index,weights))
         for tile in my_tiles(state):
+            print('------Weight------',weights[tile+iht_size*action_index])
             weights[tile+iht_size*action_index] += alpha*(reward+q_function(new_state,new_action_index,weights)-q_function(state,action_index,weights))
         state=new_state
         action=new_action
-        W.append(weights)
-        new_data = pd.DataFrame([[episode,iteration,state,action,cumulative_xcm2]],columns=columns)
-        Data = pd.concat([Data, new_data], ignore_index = True)
+        action_index = new_action_index        
+        # new_data = pd.DataFrame([[episode,iteration,state,action,cumulative_xcm2]],columns=columns)
+        # Data = pd.concat([Data, new_data], ignore_index = True)
     Data.to_csv('Simulation_data.csv')
     np.savetxt('weights.csv', np.array(W), delimiter=',')
 
@@ -209,15 +220,30 @@ state =[20,0,10,10]
 new_action_index=0
 results=[state,0,actions_space[new_action_index],0]
 for j in range(15):
-    max_q = q_function(state,new_action_index,weights)
+    max_q = -100 # q_function(state,new_action_index,weights)
     for i in get_index_of_possible_actions(state):
         q_value = q_function(state,i,weights)
+        print('----',q_value,'----',actions_space[i])
         if q_value >=max_q:
+            max_q = q_value
             new_action_index = i
     action = actions_space[new_action_index]
     reward,x_cm2,new_state = generate_simulation(state,action)
-    new_data_policy = pd.DataFrame([[state,new_action_index,actions_space[new_action_index]]],columns=columns)
+    new_data_policy = pd.DataFrame([[state,new_action_index,actions_space[new_action_index],reward]],columns=columns)
     Data_policy = pd.concat([Data_policy, new_data_policy], ignore_index = True)
+    state=new_state
 
+print(Data_policy)
 
 Data_policy.to_csv('optimal_policy.csv')
+
+for i in range(4):
+    print('---- Q function at [0,0,10,10] ---- Action ',actions_space[i])
+    print(q_function([20,0,10,10],i,weights))
+    print('---- Q function at [0,0,10,6] ---- Action ',actions_space[i])
+    print(q_function([20,0,10,6],i,weights))
+    print('---- Q function at [0,0,6,10] ---- Action ',actions_space[i])
+    print(q_function([20,0,6,10],i,weights))
+    print('---- Q function at [0,0,6,6] ---- Action ',actions_space[i])
+    print(q_function([20,0,6,6],i,weights))
+
